@@ -1,0 +1,23 @@
+.App {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 150px 1fr;
+}
+
+.header {
+    background-color: beige;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    background-color: aliceblue;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

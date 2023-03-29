@@ -1,0 +1,12 @@
+.mainInnerWrapper {
+    max-width: 1600px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gameCards {
+    display: grid;
+}
