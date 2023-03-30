@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Card.css";
 
 function Card(props) {
@@ -11,8 +11,17 @@ function Card(props) {
         output = <p>Not Chosen</p>;
     }
 
+    useEffect(() => {
+        props.sortCards();
+    }, [chosen]);
+
     return (
-        <div className="card" onClick={() => setChosen((chosen = true))}>
+        <div
+            className="card"
+            onClick={() => {
+                setChosen((chosen = true));
+            }}
+        >
             <div className="cardContent">
                 <p>{props.value}</p>
                 {output}
