@@ -4,8 +4,8 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 
 function App() {
-    const [score, setScore] = useState(0);
-    const [bestScore, setBestScore] = useState(0);
+    let [score, setScore] = useState(0);
+    let [bestScore, setBestScore] = useState(0);
 
     return (
         <div className="App">
