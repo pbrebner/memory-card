@@ -27,6 +27,9 @@ function App() {
             <main className="main">
                 <Main incrementScore={incrementScore} resetScore={resetScore} />
             </main>
+            <footer className="footer">
+                <p>Developed by Patrick Brebner</p>
+            </footer>
         </div>
     );
 }
