@@ -7,13 +7,25 @@ function App() {
     let [score, setScore] = useState(0);
     let [bestScore, setBestScore] = useState(0);
 
+    function incrementScore() {
+        let currentScore = score;
+        if (currentScore + 1 > bestScore) {
+            setBestScore(currentScore + 1);
+        }
+        setScore(currentScore + 1);
+    }
+
+    function resetScore() {
+        setScore(0);
+    }
+
     return (
         <div className="App">
             <header className="header">
                 <Header score={score} bestScore={bestScore} />
             </header>
             <main className="main">
-                <Main setScore={setScore} setBestScore={setBestScore} />
+                <Main incrementScore={incrementScore} resetScore={resetScore} />
             </main>
         </div>
     );
