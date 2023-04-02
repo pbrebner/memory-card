@@ -3,7 +3,7 @@ import "../styles/Main.css";
 import CardGrid from "./CardGrid";
 
 function Main(props) {
-    const numPokemon = 12;
+    const [level, setLevel] = useState(1);
     const [pokemons, setPokemons] = useState([]);
     const [clickedPokemons, setClickedPokemons] = useState([]);
 
@@ -26,11 +26,22 @@ function Main(props) {
     //When component mounts, fetch data from API and set pokemons state
     useEffect(() => {
         async function loadCards() {
+            let numPokemon = level * 4;
             setPokemons(shuffle(await fetchPokemons(numPokemon)));
         }
 
         loadCards();
     }, []);
+
+    //When level changes, fetch data from API and set pokemons state
+    useEffect(() => {
+        async function loadCards() {
+            let numPokemon = level * 4;
+            setPokemons(shuffle(await fetchPokemons(numPokemon)));
+        }
+
+        loadCards();
+    }, [level]);
 
     async function fetchPokemons(amountPokemon) {
         const pokemons = [];
@@ -45,18 +56,6 @@ function Main(props) {
                 pokemonsIndex.push(randomIndex);
             }
         }
-
-        /*
-        for (let i = 1; i <= amountPokemon; i++) {
-            const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${i}`;
-            const response = await fetch(pokemonUrl);
-            const pokemon = await response.json();
-            const id = pokemon.id;
-            const name = capitalizeFirstLetter(pokemon.name);
-            const image = pokemon.sprites.front_default;
-            pokemons.push({ id, name, image });
-        }
-        */
 
         for (const index of pokemonsIndex) {
             const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${index}`;
@@ -81,19 +80,45 @@ function Main(props) {
     function checkSelection(pokemonName) {
         if (clickedPokemons.includes(pokemonName)) {
             resetGame();
+        } else if (level === 4 && clickedPokemons.length + 1 === level * 4) {
+            // Runs if you are on the final level and guess the final character correctly
+            props.incrementScore();
+            winGame();
+        } else if (clickedPokemons.length + 1 === level * 4) {
+            // Runs of the selection was correct and you have correctly guessed all for that level
+            props.incrementScore();
+            increaseLevel();
         } else {
             props.incrementScore();
             setClickedPokemons((prevState) => [...prevState, pokemonName]);
         }
     }
 
+    function increaseLevel() {
+        setClickedPokemons([]);
+        const currentLevel = level;
+        setLevel(currentLevel + 1);
+    }
+
+    function winGame() {
+        const gameStatement = document.querySelector(".gameStatement");
+        gameStatement.innerHTML = "Congratulations, You Won the Game!";
+        setTimeout(() => {
+            gameStatement.innerHTML = "Select All Characters Once";
+            resetGame();
+        }, 6000);
+    }
+
     function resetGame() {
         setClickedPokemons([]);
+        setLevel(1);
         props.resetScore();
     }
 
     return (
         <div className="mainInnerWrapper">
+            <h2 className="level">Level {level}</h2>
+            <h2 className="gameStatement">Select All Characters Once</h2>
             {pokemons.length ? (
                 <CardGrid
                     pokemons={pokemons}
