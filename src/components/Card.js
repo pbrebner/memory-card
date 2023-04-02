@@ -2,29 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../styles/Card.css";
 
 function Card(props) {
-    let [chosen, setChosen] = useState(false);
-    let output;
-
-    if (chosen) {
-        output = <p>This was Chosen</p>;
-    } else {
-        output = <p>Not Chosen</p>;
-    }
-
-    useEffect(() => {
-        props.sortCards();
-    }, [chosen]);
-
     return (
-        <div
-            className="card"
-            onClick={() => {
-                setChosen((chosen = true));
-            }}
-        >
+        <div className="card" onClick={props.handleClick}>
             <div className="cardContent">
-                <p>{props.value}</p>
-                {output}
+                <img src={props.pokemon.image} alt={props.pokemon.name} />
+                <p>{props.pokemon.name}</p>
             </div>
         </div>
     );
