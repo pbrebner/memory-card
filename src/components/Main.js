@@ -34,9 +34,32 @@ function Main(props) {
 
     async function fetchPokemons(amountPokemon) {
         const pokemons = [];
+        const pokemonsIndex = [];
 
+        //Gets a set of random indices between 1 and 151 to determine which pokemon are selected
+        while (pokemonsIndex.length < amountPokemon) {
+            let randomIndex = Math.floor(Math.random() * 150) + 1;
+            if (pokemonsIndex.includes(randomIndex)) {
+                continue;
+            } else {
+                pokemonsIndex.push(randomIndex);
+            }
+        }
+
+        /*
         for (let i = 1; i <= amountPokemon; i++) {
             const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${i}`;
+            const response = await fetch(pokemonUrl);
+            const pokemon = await response.json();
+            const id = pokemon.id;
+            const name = capitalizeFirstLetter(pokemon.name);
+            const image = pokemon.sprites.front_default;
+            pokemons.push({ id, name, image });
+        }
+        */
+
+        for (const index of pokemonsIndex) {
+            const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${index}`;
             const response = await fetch(pokemonUrl);
             const pokemon = await response.json();
             const id = pokemon.id;
@@ -50,7 +73,6 @@ function Main(props) {
 
     //When card is clicked, check clicked value against clickedPokemon state
     function handleCardClick(e) {
-        console.log(e.target.parentNode.lastChild.textContent);
         const pokemonName = e.target.parentNode.lastChild.textContent;
         checkSelection(pokemonName);
         setPokemons(shuffle(pokemons));
