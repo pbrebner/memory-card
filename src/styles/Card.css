@@ -1,9 +1,27 @@
 .card {
     background-color: aquamarine;
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 180px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.cardImage {
+    scale: 1.2;
+}
+
+.cardName {
+    font-size: 1.2rem;
 }

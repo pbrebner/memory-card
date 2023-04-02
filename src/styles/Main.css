@@ -1,12 +1,21 @@
 .mainInnerWrapper {
-    max-width: 1600px;
+    max-width: 1100px;
     padding: 20px;
     flex: 1;
+
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: start;
     align-items: center;
 }
 
-.gameCards {
-    display: grid;
+.level {
+    color: white;
+    font-size: 2rem;
+}
+
+.gameStatement {
+    color: white;
+    font-size: 2rem;
 }

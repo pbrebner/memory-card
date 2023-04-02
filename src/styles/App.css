@@ -5,7 +5,7 @@
 }
 
 .header {
-    background-color: beige;
+    background-color: rgb(40, 44, 52);
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     z-index: 10;
 
@@ -15,7 +15,17 @@
 }
 
 .main {
-    background-color: aliceblue;
+    background-color: rgb(62, 68, 81);
+
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.footer {
+    height: 30px;
+    background-color: rgb(40, 44, 52);
+    color: white;
 
     display: flex;
     justify-content: center;
