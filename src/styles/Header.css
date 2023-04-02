@@ -1,5 +1,5 @@
 .headerInnerWrapper {
-    max-width: 1600px;
+    max-width: 1200px;
     padding: 20px;
     flex: 1;
     display: flex;
@@ -7,11 +7,23 @@
     align-items: center;
 }
 
+.nameContainer {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.pokeballLogo {
+    height: 50px;
+}
+
 .gameName {
     font-size: 3rem;
+    color: white;
 }
 
 .scores {
+    color: white;
     font-size: 1.8rem;
     display: flex;
     gap: 20px;
@@ -20,5 +32,5 @@
 .vl {
     height: 40px;
     width: 3px;
-    background-color: black;
+    background-color: white;
 }
