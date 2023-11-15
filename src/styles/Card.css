@@ -9,6 +9,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
+}
+
+.card:hover {
+    scale: 1.05;
 }
 
 .cardContent {
