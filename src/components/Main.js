@@ -23,52 +23,42 @@ function Main(props) {
         return string.slice(0, 1).toUpperCase() + string.slice(1);
     }
 
-    //When component mounts, fetch data from API and set pokemons state
+    // On mount and when level changes, fetch data from API and set pokemons state
     useEffect(() => {
         async function loadCards() {
             let numPokemon = level * 4;
             setPokemons(shuffle(await fetchPokemons(numPokemon)));
         }
 
-        loadCards();
-    }, []);
+        async function fetchPokemons(amountPokemon) {
+            const pokemons = [];
+            const pokemonsIndex = [];
 
-    //When level changes, fetch data from API and set pokemons state
-    useEffect(() => {
-        async function loadCards() {
-            let numPokemon = level * 4;
-            setPokemons(shuffle(await fetchPokemons(numPokemon)));
+            //Gets a set of random indices between 1 and 151 to determine which pokemon are selected
+            while (pokemonsIndex.length < amountPokemon) {
+                let randomIndex = Math.floor(Math.random() * 150) + 1;
+                if (pokemonsIndex.includes(randomIndex)) {
+                    continue;
+                } else {
+                    pokemonsIndex.push(randomIndex);
+                }
+            }
+
+            for (const index of pokemonsIndex) {
+                const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${index}`;
+                const response = await fetch(pokemonUrl);
+                const pokemon = await response.json();
+                const id = pokemon.id;
+                const name = capitalizeFirstLetter(pokemon.name);
+                const image = pokemon.sprites.front_default;
+                pokemons.push({ id, name, image });
+            }
+
+            return pokemons;
         }
 
         loadCards();
     }, [level]);
-
-    async function fetchPokemons(amountPokemon) {
-        const pokemons = [];
-        const pokemonsIndex = [];
-
-        //Gets a set of random indices between 1 and 151 to determine which pokemon are selected
-        while (pokemonsIndex.length < amountPokemon) {
-            let randomIndex = Math.floor(Math.random() * 150) + 1;
-            if (pokemonsIndex.includes(randomIndex)) {
-                continue;
-            } else {
-                pokemonsIndex.push(randomIndex);
-            }
-        }
-
-        for (const index of pokemonsIndex) {
-            const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${index}`;
-            const response = await fetch(pokemonUrl);
-            const pokemon = await response.json();
-            const id = pokemon.id;
-            const name = capitalizeFirstLetter(pokemon.name);
-            const image = pokemon.sprites.front_default;
-            pokemons.push({ id, name, image });
-        }
-
-        return pokemons;
-    }
 
     //When card is clicked, check clicked value against clickedPokemon state
     function handleCardClick(e) {
