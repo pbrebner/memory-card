@@ -1,7 +1,7 @@
 .card {
     background-color: aquamarine;
-    width: 160px;
-    height: 180px;
+    width: 120px;
+    height: 150px;
 
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
@@ -24,10 +24,17 @@
     align-items: center;
 }
 
-.cardImage {
-    scale: 1.2;
-}
-
 .cardName {
     font-size: 1.2rem;
+}
+
+@media (min-width: 600px) {
+    .card {
+        width: 160px;
+        height: 180px;
+    }
+
+    .cardImage {
+        scale: 1.2;
+    }
 }

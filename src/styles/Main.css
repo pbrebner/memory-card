@@ -12,10 +12,18 @@
 
 .level {
     color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .gameStatement {
     color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+@media (min-width: 600px) {
+    .gameStatement,
+    .level {
+        font-size: 2rem;
+    }
 }

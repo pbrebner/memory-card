@@ -1,5 +1,11 @@
 .cardGrid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+}
+
+@media (min-width: 800px) {
+    .cardGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
