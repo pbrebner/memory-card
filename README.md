@@ -20,3 +20,6 @@ npm start
 -   React
 -   Function Components
 -   Hooks
+
+## Todo
+ - Add loading animation for cards
